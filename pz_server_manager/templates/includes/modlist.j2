@@ -1,0 +1,28 @@
+{% for mod in mods %}
+    <div class="col">
+        <div class="card {% if mod.modId == None %}highlight{% endif %} ">
+            <img class="card-img-top" src="{{ mod.thumbnail }}" alt="mod-thumbnail">
+            <div class="card-body">
+                <h5 class="card-title text-nowrap text-center">{{ mod.name }}</h5>
+                <div class="card-text">
+                    <div class="row">
+                        <div class="col">
+                            <b class="text-nowrap"> Mod ID: </b>
+                        </div>
+                        <div class="col">
+                            <p class="text-nowrap">{{ mod.modId }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <b class="text-nowrap">Workshop ID:</b>
+                        </div>
+                        <div class="col">
+                            <p class="text-nowrap">{{ mod.workshopId }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

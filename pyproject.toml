@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "pz-server-manager"
+version = "0.1.0"
+description = ""
+authors = ["Fakeapate <imboden.samuel@protonmail.ch>"]
+packages = [
+    { include = "pz_server_manager" },
+    { include = "Rcon" },
+    { include = "SteamCollection" },
+]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flask = "^3.0.0"
+requests = "^2.31.0"
+
+
+[tool.poetry.group.dev.dependencies]
+python-dotenv = "^1.0.0"
+djlint = "^1.34.1"
+black = "^23.12.1"
+mypy = "^1.8.0"
+flake8 = "^7.0.0"
+types-requests = "^2.31.0.20240106"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 88

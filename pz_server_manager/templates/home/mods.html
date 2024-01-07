@@ -1,0 +1,73 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Mods {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="pcoded-main-container">
+    <div class="pcoded-wrapper">
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+                <!-- [ breadcrumb ] start -->
+                <div class="page-header">
+                    <div class="page-block">
+                        <div class="row align-items-center">
+                            <div class="col-md-12">
+                                <div class="page-header-title">
+                                    <h5 class="m-b-10">Mods</h5>
+                                </div>
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="javascript:">Mods</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ breadcrumb ] end -->
+                <div class="main-body">
+                    <div class="page-wrapper">
+                        <!-- [ Main Content ] start -->
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <h5 class="card-header">Infos</h5>
+                                    <div class="card-body">
+                                        <p id="modcount" class="card-text">Mods in Collection: {{ count_mods }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="card text-center">
+                                    <h5 class="card-header">Controls</h5>
+                                    <div class="card-body">
+                                        <div class="btn-group-md btn-group-vertical">
+                                            <button type="button" onclick="fetch_collection()" class="btn btn-primary">Fetch Collection</button>
+                                            <button type="button" onclick="interact('apply_collection')" class="btn btn-primary">Apply Collection</button>
+                                            <button type="button" onclick="interact('restart_server')" class="btn btn-danger">Restart Server</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="modlist" class="row">
+                            {% include 'includes/modlist.j2' %}
+                            <!--[ Recent Users ] end-->
+                            <!-- [ Main Content ] end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- [ Main Content ] end -->
+
+    {% endblock content %}
+
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}
