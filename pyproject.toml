@@ -5,8 +5,7 @@ description = ""
 authors = ["Fakeapate <imboden.samuel@protonmail.ch>"]
 packages = [
     { include = "pz_server_manager" },
-    { include = "Rcon" },
-    { include = "SteamCollection" },
+    { include = "steam_api" },
 ]
 readme = "README.md"
 
@@ -20,14 +19,13 @@ waitress = "^2.1.2"
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^1.0.0"
 djlint = "^1.34.1"
-black = "^23.12.1"
 mypy = "^1.8.0"
-flake8 = "^7.0.0"
 types-requests = "^2.31.0.20240106"
+autopep8 = "^2.0.4"
+pylint = "^3.0.3"
+pylance = "^0.9.4"
+isort = "^5.13.2"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.black]
-line-length = 88

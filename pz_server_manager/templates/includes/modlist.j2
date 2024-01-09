@@ -1,7 +1,9 @@
 {% for mod in mods %}
     <div class="col">
-        <div class="card {% if mod.modId == None %}highlight{% endif %} ">
-            <img class="card-img-top" src="{{ mod.thumbnail }}" alt="mod-thumbnail">
+        <div class="card shadow mb-4 {% if mod.modId == None %}highlight{% endif %} ">
+            <img class="card-img-top"
+                 src="{{ mod.thumbnail }}"
+                 alt="mod-thumbnail">
             <div class="card-body">
                 <h5 class="card-title text-nowrap text-center">{{ mod.name }}</h5>
                 <div class="card-text">

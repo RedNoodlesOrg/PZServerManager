@@ -1,23 +1,20 @@
-<nav class="pcoded-navbar">
-    <div class="navbar-wrapper">
-        <div class="navbar-brand header-logo">
-            <a href="/" class="b-brand">
-                <div class="b-bg">
-                    <i class="feather icon-server"></i>
-                </div>
-                <span class="b-title">PZServer Manager</span>
-            </a>
-            <a class="mobile-menu" id="mobile-collapse" href="javascript:"></a>
+<ul id="accordionSidebar"
+    class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center"
+       href="index.html">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="navbar-content scroll-div">
-            <ul class="nav pcoded-inner-navbar">
-                <li class="nav-item pcoded-menu-caption">
-                    <label>Navigation</label>
-                </li>
-                <li data-username="Mods" class="nav-item">
-                    <a href="/" class="nav-link"><span class="pcoded-micon"><i class="feather icon-layers"></i></span><span class="pcoded-mtext">Mods</span></a>
-                </li>
-            </ul>
+        <div class="sidebar-brand-text mx-3">
+            PZ Server Manager
         </div>
+    </a>
+    <hr class="sidebar-divider my-0">
+    <li data-username="Mods" class="nav-item">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-layer-group"></i><span>Mods</span></a>
+    </li>
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-</nav>
+</ul>
