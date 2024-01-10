@@ -1,4 +1,8 @@
 {
     "python.analysis.typeCheckingMode": "basic",
     "python.analysis.autoImportCompletions": true,
+    "sonarlint.connectedMode.project": {
+        "connectionId": "rednoodles",
+        "projectKey": "RedNoodlesOrg_PZServerManager"
+    },
 }
