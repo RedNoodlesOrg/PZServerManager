@@ -1,9 +1,8 @@
 """log.py"""
 
 from dataclasses import dataclass
-from itertools import starmap
 import re
-from typing import Any, Optional, TypeVar
+from typing import Any, Dict, List, Optional, Union
 
 REGEX_TIMESTAMP = r"(?P<timestamp>\d{2}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3})"
 REGEX_LEVEL = r"(?P<level>\w+)"
@@ -31,7 +30,7 @@ class Chat(Base):
     """Chat"""
     level: str
     message: str
-    NAME="chat"
+    NAME = "chat"
     PARSER = re.compile(f"""
         \\[{REGEX_TIMESTAMP}\\]
         \\[{REGEX_LEVEL}\\]\\s
@@ -43,7 +42,7 @@ class Admin(Base):
     """Admin"""
     level: Optional[str]
     message: str
-    NAME="admin"
+    NAME = "admin"
     PARSER = re.compile(f"""
         \\[{REGEX_TIMESTAMP}\\]\\s?
         (\\[{REGEX_LEVEL}\\])?\\s
@@ -58,7 +57,7 @@ class DebugServer(Base):
     type: str
     unix_timestamp: str
     coordinates: str
-    NAME="DebugLog-server"
+    NAME = "DebugLog-server"
     PARSER = re.compile(f"""
        \\[{REGEX_TIMESTAMP}\\]\\s*
        {REGEX_LEVEL}\\s*:\\s
@@ -76,7 +75,7 @@ class Pvp(Base):
     username: str
     coordinates: Optional[str]
     action: str
-    NAME="pvp"
+    NAME = "pvp"
     PARSER = re.compile(f"""
         \\[{REGEX_TIMESTAMP}\\]
         (\\[{REGEX_LEVEL}\\])?
@@ -92,7 +91,7 @@ class User(Base):
     steam_id: Optional[str]
     username: Optional[str]
     message: str
-    NAME="user"
+    NAME = "user"
     PARSER = re.compile(f"""
         \\[{REGEX_TIMESTAMP}\\]\\s
         ({REGEX_STEAMID}\\s
@@ -107,7 +106,7 @@ class Cmd(Base):
     username: str
     coordinates: str
     action: str
-    NAME="cmd"
+    NAME = "cmd"
     PARSER = re.compile(f"""\\[
        {REGEX_TIMESTAMP}\\]\\s
        {REGEX_STEAMID}\\s
@@ -123,7 +122,7 @@ class Map(Base):
     username: str
     coordinates: str
     action: str
-    NAME="map"
+    NAME = "map"
     PARSER = re.compile(f"""
         \\[{REGEX_TIMESTAMP}\\]\\s
         {REGEX_STEAMID}\\s
@@ -140,7 +139,7 @@ class PerkLog(Base):
     message: str
     coordinates: str
     hours_survived: str
-    NAME="PerkLog"
+    NAME = "PerkLog"
     PARSER = re.compile(f"""
         \\[{REGEX_TIMESTAMP}\\]\\s
         \\[{REGEX_STEAMID}\\]
@@ -159,7 +158,7 @@ class Item(Base):
     container: str
     inventory_change: str
     items: Optional[str]
-    NAME="item"
+    NAME = "item"
     PARSER = re.compile(f"""
         \\[{REGEX_TIMESTAMP}\\]\\s
         {REGEX_STEAMID}\\s
@@ -178,7 +177,7 @@ class ClientAction(Base):
     coordinates: str
     container: str
     action: str
-    NAME="ClientActionLog"
+    NAME = "ClientActionLog"
     PARSER = re.compile(f"""
         \\[{REGEX_TIMESTAMP}\\]\\s
         \\[{REGEX_STEAMID}\\]
@@ -187,9 +186,11 @@ class ClientAction(Base):
         \\[{REGEX_COORDINATES}\\]
         \\[{REGEX_CONTAINER}\\]\\.""", re.X)
 
-Log = TypeVar('Log', ClientAction, Item, PerkLog, Map, Cmd, User, Pvp, DebugServer, Admin, Chat)
 
-FACTORY: dict[str, type] = {
+LogVar = Union[ClientAction, Item, PerkLog, Map,
+              Cmd, User, Pvp, DebugServer, Admin, Chat]
+
+FACTORY: Dict[str, type[LogVar]] = {
     DebugServer.NAME: DebugServer,
     Chat.NAME: Chat,
     Pvp.NAME: Pvp,
@@ -201,3 +202,23 @@ FACTORY: dict[str, type] = {
     Map.NAME: Map,
     User.NAME: User
 }
+
+
+class LogCollection():
+    """LogCollection"""
+    all_logs: Dict[type[LogVar], List[LogVar]]
+
+    def __init__(self):
+        self.all_logs = {}
+
+    def add(self, entry: LogVar):
+        """add"""
+        self.all_logs.setdefault(type(entry), []).append(entry)
+
+    def get(self, log_types: List[type[LogVar]]) -> List[LogVar]:
+        """get"""
+        logs: List[LogVar] = []
+        for log_type, log_list in self.all_logs.items():
+            if log_type in log_types:
+                logs.extend(log_list)
+        return logs
