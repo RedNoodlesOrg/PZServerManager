@@ -6,16 +6,15 @@ Edited by Fakeapate
 
 import os
 
-from flask import Blueprint, Request, jsonify, render_template, request, g
+from flask import Blueprint, Request, jsonify, render_template, request
 from jinja2 import TemplateNotFound
-from pz_server_manager.server.file_parser.models.log import Chat, LogCollection
 
+from pz_server_manager.server.docker import restart
 from pz_server_manager.server.file_parser.modlist import Modlist
 from pz_server_manager.server.file_parser.server_settings import ServerSettings
 from steam_api.collection import Collection
 
-from .config import CurrentConfig
-from .server.file_parser.file_parser import read_all
+from pz_server_manager.config import CurrentConfig
 
 blueprint = Blueprint(
     "views",
@@ -34,9 +33,9 @@ def base_render(file: str, **kwargs):
 
 
 @blueprint.route("/cmd/restart", methods=["POST"])
-def restart():
+def cmd_restart():
     """restart"""
-    return jsonify(success=False)
+    return jsonify(success=restart())
 
 
 @blueprint.route("/cmd/applymods", methods=["POST"])
@@ -59,14 +58,16 @@ def pz():
     return base_render(
         "home/mods.html", segment=segment, mods=mods, count_mods=len(mods)
     )
+
+
 @blueprint.route("/logs")
 @blueprint.route("/logs.html")
 def logs():
     """logs"""
-    collection: LogCollection = g.setdefault('collection', read_all())
-    log_collection = collection.get([Chat])
     segment = get_segment(request)
-    return base_render("home/logs.html", segment=segment, logs = log_collection)
+    return base_render("home/logs.html", segment=segment)
+
+
 def get_segment(req: Request):
     """Helper - Extract current page name from request"""
     try:

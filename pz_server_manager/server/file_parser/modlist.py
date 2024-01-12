@@ -43,5 +43,6 @@ class Modlist():
             raise ValueError("either mods or workshopids needs to be set!")
         if self.mods is None and self.workshopids is not None:
             workshopids = self.workshopids.split(";")
-            self.mods = get_mods_from_details(get_published_file_details(workshopids))
+            self.mods = get_mods_from_details(
+                get_published_file_details(workshopids))
         return self.mods

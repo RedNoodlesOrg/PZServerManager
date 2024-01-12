@@ -1,5 +1,4 @@
 """
-Copyright (c) 2019 - present AppSeed.us
 Edited by Fakeapate
 """
 
@@ -17,6 +16,8 @@ class Config:
     RCON_PORT = os.getenv("RCON_PORT", "27015")
     COLLECTION_ID = os.getenv("COLLECTION_ID", "3126799274")
     PZ_SERVER_FOLDER = os.getenv("PZ_SERVER_FOLDER", "")
+    DOCKER_URL = os.getenv("DOCKER_URL", "unix://var/run/docker.sock")
+    DOCKER_CONTAINER = os.getenv("DOCKER_CONTAINER", "pzserver_node_1")
 
 
 @dataclass

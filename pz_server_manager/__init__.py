@@ -1,14 +1,11 @@
 """
-Copyright (c) 2019 - present AppSeed.us
 Edited by Fakeapate
 """
 
-from flask import Flask, g
+from flask import Flask
 
 from .config import CurrentConfig
-
 from .routes import blueprint
-
 
 
 def create_app():

@@ -225,6 +225,27 @@ regex = ">=2023.0.0,<2024.0.0"
 tqdm = ">=4.62.2,<5.0.0"
 
 [[package]]
+name = "docker"
+version = "7.0.0"
+description = "A Python library for the Docker Engine API."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "docker-7.0.0-py3-none-any.whl", hash = "sha256:12ba681f2777a0ad28ffbcc846a69c31b4dfd9752b47eb425a274ee269c5e14b"},
+    {file = "docker-7.0.0.tar.gz", hash = "sha256:323736fb92cd9418fc5e7133bc953e11a9da04f4483f828b527db553f1e7e5a3"},
+]
+
+[package.dependencies]
+packaging = ">=14.0"
+pywin32 = {version = ">=304", markers = "sys_platform == \"win32\""}
+requests = ">=2.26.0"
+urllib3 = ">=1.26.0"
+
+[package.extras]
+ssh = ["paramiko (>=2.4.3)"]
+websockets = ["websocket-client (>=1.3.0)"]
+
+[[package]]
 name = "editorconfig"
 version = "0.12.3"
 description = "EditorConfig File Locator and Interpreter for Python"
@@ -543,6 +564,17 @@ files = [
 ]
 
 [[package]]
+name = "packaging"
+version = "23.2"
+description = "Core utilities for Python packages"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "packaging-23.2-py3-none-any.whl", hash = "sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7"},
+    {file = "packaging-23.2.tar.gz", hash = "sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5"},
+]
+
+[[package]]
 name = "pathspec"
 version = "0.12.1"
 description = "Utility library for gitignore style pattern matching of file paths."
@@ -629,16 +661,16 @@ files = [
 
 [[package]]
 name = "pylance"
-version = "0.9.5"
+version = "0.9.6"
 description = "python wrapper for Lance columnar format"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pylance-0.9.5-cp38-abi3-macosx_10_15_x86_64.whl", hash = "sha256:08578a423e2df0bdc988a5482858671c0deeb355bbe167c0b5a3d9420372301f"},
-    {file = "pylance-0.9.5-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:575266eeac8e245399ac862f44ff324d77459bb05aaac61ad26c667dca3395b7"},
-    {file = "pylance-0.9.5-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1e358341a4912d88c19f36b941bf42ff7fba9c5c6bb6668061cb5f967efe5219"},
-    {file = "pylance-0.9.5-cp38-abi3-manylinux_2_24_aarch64.whl", hash = "sha256:acbff47215c1a0d7ec59ce481eb712f6ce170e8508ffe6a666dea79cbb404d96"},
-    {file = "pylance-0.9.5-cp38-abi3-win_amd64.whl", hash = "sha256:b3477aba816ba27f98615c6ce4d7c7e13bec8edb78ac7f659b2d463fd1b7edaf"},
+    {file = "pylance-0.9.6-cp38-abi3-macosx_10_15_x86_64.whl", hash = "sha256:d77d592d443b30eb6eb6ba702dee025cc31ae428d395ee50a38ba0bd3661f34f"},
+    {file = "pylance-0.9.6-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:5e1757410f3762d427a0eb2ebd24d5a0f0e394486478609f4100ea2c82a6cc99"},
+    {file = "pylance-0.9.6-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:89ddfaa44bb6112fa28295c095e40e53ad2e2502ead52774897bc17f7a612f09"},
+    {file = "pylance-0.9.6-cp38-abi3-manylinux_2_24_aarch64.whl", hash = "sha256:25ac671c7cccae05756a8922e38cc4e7f4010e750b25691d6b6aa3ff0e4f699a"},
+    {file = "pylance-0.9.6-cp38-abi3-win_amd64.whl", hash = "sha256:7a6ba6e7642cc962724b26eccd6bf21f0b71bdc9d53b14a66e3a9df32064e85f"},
 ]
 
 [package.dependencies]
@@ -687,6 +719,29 @@ files = [
 
 [package.extras]
 cli = ["click (>=5.0)"]
+
+[[package]]
+name = "pywin32"
+version = "306"
+description = "Python for Window Extensions"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pywin32-306-cp310-cp310-win32.whl", hash = "sha256:06d3420a5155ba65f0b72f2699b5bacf3109f36acbe8923765c22938a69dfc8d"},
+    {file = "pywin32-306-cp310-cp310-win_amd64.whl", hash = "sha256:84f4471dbca1887ea3803d8848a1616429ac94a4a8d05f4bc9c5dcfd42ca99c8"},
+    {file = "pywin32-306-cp311-cp311-win32.whl", hash = "sha256:e65028133d15b64d2ed8f06dd9fbc268352478d4f9289e69c190ecd6818b6407"},
+    {file = "pywin32-306-cp311-cp311-win_amd64.whl", hash = "sha256:a7639f51c184c0272e93f244eb24dafca9b1855707d94c192d4a0b4c01e1100e"},
+    {file = "pywin32-306-cp311-cp311-win_arm64.whl", hash = "sha256:70dba0c913d19f942a2db25217d9a1b726c278f483a919f1abfed79c9cf64d3a"},
+    {file = "pywin32-306-cp312-cp312-win32.whl", hash = "sha256:383229d515657f4e3ed1343da8be101000562bf514591ff383ae940cad65458b"},
+    {file = "pywin32-306-cp312-cp312-win_amd64.whl", hash = "sha256:37257794c1ad39ee9be652da0462dc2e394c8159dfd913a8a4e8eb6fd346da0e"},
+    {file = "pywin32-306-cp312-cp312-win_arm64.whl", hash = "sha256:5821ec52f6d321aa59e2db7e0a35b997de60c201943557d108af9d4ae1ec7040"},
+    {file = "pywin32-306-cp37-cp37m-win32.whl", hash = "sha256:1c73ea9a0d2283d889001998059f5eaaba3b6238f767c9cf2833b13e6a685f65"},
+    {file = "pywin32-306-cp37-cp37m-win_amd64.whl", hash = "sha256:72c5f621542d7bdd4fdb716227be0dd3f8565c11b280be6315b06ace35487d36"},
+    {file = "pywin32-306-cp38-cp38-win32.whl", hash = "sha256:e4c092e2589b5cf0d365849e73e02c391c1349958c5ac3e9d5ccb9a28e017b3a"},
+    {file = "pywin32-306-cp38-cp38-win_amd64.whl", hash = "sha256:e8ac1ae3601bee6ca9f7cb4b5363bf1c0badb935ef243c4733ff9a393b1690c0"},
+    {file = "pywin32-306-cp39-cp39-win32.whl", hash = "sha256:e25fd5b485b55ac9c057f67d94bc203f3f6595078d1fb3b458c9c28b7153a802"},
+    {file = "pywin32-306-cp39-cp39-win_amd64.whl", hash = "sha256:39b61c15272833b5c329a2989999dcae836b1eed650252ab1b7bfbe1d59f30f4"},
+]
 
 [[package]]
 name = "pyyaml"
@@ -988,4 +1043,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "49f706748eb8c77721c49faf1f4f89d474e840b04696b2f53ad5952aa7cbd040"
+content-hash = "fbaded2069a2b7aa068742407a24c0ece8a45cd733ddab61e6e148b98e9c8c3f"
