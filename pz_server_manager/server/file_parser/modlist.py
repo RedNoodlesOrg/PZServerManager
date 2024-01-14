@@ -29,8 +29,12 @@ class Modlist():
         """get_modids"""
         if self.modids is None or self.workshopids is None:
             if self.mods:
-                self.modids = ";".join(
-                    [str(mod.mod_id) for mod in self.mods])
+                mod_ids = []
+                for mod in self.mods:
+                    for mod_id in mod.mod_ids:
+                        if mod_id.enabled:
+                            mod_ids.append(mod_id.id)
+                self.modids = ";".join(mod_ids)
                 self.workshopids = ";".join(
                     [mod.workshop_id for mod in self.mods])
             else:
@@ -43,5 +47,6 @@ class Modlist():
             raise ValueError("either mods or workshopids needs to be set!")
         if self.mods is None and self.workshopids is not None:
             workshopids = self.workshopids.split(";")
-            self.mods = get_mods_from_details(get_published_file_details(workshopids))
+            self.mods = get_mods_from_details(
+                get_published_file_details(workshopids))
         return self.mods
