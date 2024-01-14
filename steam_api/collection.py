@@ -4,9 +4,10 @@ from dataclasses import dataclass
 
 from requests import post
 
-from .mod import Mod
-from .utilities import (get_collection_details, get_mods_from_details,
-                        get_published_file_details)
+from steam_api.mod import Mod
+from steam_api.utilities import (get_collection_details, get_mods_from_details,
+                                 get_published_file_details)
+from pz_server_manager.server.db.mod import sync
 
 
 @dataclass
@@ -24,6 +25,8 @@ class Collection:
     def __init__(self, collection_id: str):
         file_ids = [
             item["publishedfileid"]
-            for item in get_collection_details([collection_id])["collectiondetails"][0]["children"]
+            for item in get_collection_details([collection_id])[
+                "collectiondetails"][0]["children"]
         ]
         self.mods = get_mods_from_details(get_published_file_details(file_ids))
+        sync(self.mods)

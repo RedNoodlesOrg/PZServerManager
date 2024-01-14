@@ -6,15 +6,15 @@ Edited by Fakeapate
 
 import os
 
-from flask import Blueprint, Request, jsonify, render_template, request
+from flask import Blueprint, jsonify, render_template
 from jinja2 import TemplateNotFound
 
+from pz_server_manager.config import CurrentConfig
 from pz_server_manager.server.docker import restart
 from pz_server_manager.server.file_parser.modlist import Modlist
 from pz_server_manager.server.file_parser.server_settings import ServerSettings
 from steam_api.collection import Collection
-
-from pz_server_manager.config import CurrentConfig
+from pz_server_manager.server.db.mod import update_enabled
 
 blueprint = Blueprint(
     "views",
@@ -39,7 +39,7 @@ def cmd_restart():
 
 
 @blueprint.route("/cmd/applymods", methods=["POST"])
-def apply_mods():
+def cmd_apply_mods():
     """apply_mods"""
     server_settings = ServerSettings(os.path.join(
         CurrentConfig.PZ_SERVER_FOLDER, "Server/servertest.ini"))
@@ -48,15 +48,20 @@ def apply_mods():
     return jsonify(success=True)
 
 
+@blueprint.route("/cmd/update/mod/<string:workshop_id>/<string:mod_id>/<int:enabled>", methods=["POST"])
+def cmd_update_enabled(workshop_id: str, mod_id: str, enabled: int):
+    """update_enabled"""
+    return jsonify(success=update_enabled(workshop_id, mod_id, enabled == 1))
+
+
 @blueprint.route("/")
 @blueprint.route("/index")
 @blueprint.route("/index.html")
 def pz():
     """pz"""
-    segment = get_segment(request)
     mods = Collection(CurrentConfig.COLLECTION_ID).mods
     return base_render(
-        "home/mods.html", segment=segment, mods=mods, count_mods=len(mods)
+        "home/mods.html", mods=mods, count_mods=len(mods)
     )
 
 
@@ -64,16 +69,4 @@ def pz():
 @blueprint.route("/logs.html")
 def logs():
     """logs"""
-    segment = get_segment(request)
-    return base_render("home/logs.html", segment=segment)
-
-
-def get_segment(req: Request):
-    """Helper - Extract current page name from request"""
-    try:
-        segment = req.path.split("/")[-1]
-        if segment == "":
-            segment = "index"
-        return segment
-    except Exception:
-        return None
+    return base_render("home/logs.html")

@@ -29,8 +29,12 @@ class Modlist():
         """get_modids"""
         if self.modids is None or self.workshopids is None:
             if self.mods:
-                self.modids = ";".join(
-                    [str(mod.mod_id) for mod in self.mods])
+                mod_ids = []
+                for mod in self.mods:
+                    for mod_id in mod.mod_ids:
+                        if mod_id.enabled:
+                            mod_ids.append(mod_id.id)
+                self.modids = ";".join(mod_ids)
                 self.workshopids = ";".join(
                     [mod.workshop_id for mod in self.mods])
             else:

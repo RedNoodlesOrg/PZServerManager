@@ -6,6 +6,9 @@ function apply_mods() {
     fetch('/cmd/applymods', { method: 'POST' }).then(response => response.json()).then(data => show_result(data.success));
 }
 
+function apply_checkbox(e, workshop_id, mod_id) {
+  fetch(`cmd/update/mod/${ workshop_id}/${mod_id}/${e.target.checked? 1 : 0}`, { method: 'POST' })
+}
 function show_result(success) {
     if (success) {
         showToast("Your action was successful.", true)
