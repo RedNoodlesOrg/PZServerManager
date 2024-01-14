@@ -3,8 +3,7 @@
 from sqlalchemy import Boolean, Column, ForeignKey, String, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
-from steam_api.mod import ModId, Mod
-
+from steam_api.mod import Mod, ModId
 
 Base = declarative_base()
 
@@ -66,7 +65,8 @@ def sync(mods: list[Mod]):
                 if existing_mod_id:
                     mod_id.enabled = existing_mod_id.enabled
                 else:
-                    existing_mod.mod_ids.append(SQLModID.from_steam(mod_id, mod.workshop_id))
+                    existing_mod.mod_ids.append(
+                        SQLModID.from_steam(mod_id, mod.workshop_id))
         else:
             sqlmod = SQLMod.from_steam(mod)
             session.add(sqlmod)

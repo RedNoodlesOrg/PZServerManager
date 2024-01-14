@@ -52,7 +52,8 @@ class ServerSettings():
         if self._file_lines:
             modids, workshopids = modlist.get_ids()
             self._file_lines[self._mods_index] = "Mods=" + modids + "\n"
-            self._file_lines[self._workshop_index] = "WorkshopItems=" + workshopids + "\n"
+            self._file_lines[self._workshop_index] = "WorkshopItems=" + \
+                workshopids + "\n"
         else:
             raise ValueError("Was not able to read config file")
         return self

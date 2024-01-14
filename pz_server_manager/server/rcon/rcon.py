@@ -37,7 +37,8 @@ class RconPacket:
             self.size(),
             self.pkt_id,
             self.pkt_type,
-            bytearray(self.body, "utf-8") if isinstance(self.body, str) else self.body,
+            bytearray(self.body, "utf-8") if isinstance(self.body,
+                                                        str) else self.body,
         )
 
 

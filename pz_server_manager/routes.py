@@ -10,11 +10,11 @@ from flask import Blueprint, jsonify, render_template
 from jinja2 import TemplateNotFound
 
 from pz_server_manager.config import CurrentConfig
+from pz_server_manager.server.db.mod import update_enabled
 from pz_server_manager.server.docker import restart
 from pz_server_manager.server.file_parser.modlist import Modlist
 from pz_server_manager.server.file_parser.server_settings import ServerSettings
 from steam_api.collection import Collection
-from pz_server_manager.server.db.mod import update_enabled
 
 blueprint = Blueprint(
     "views",

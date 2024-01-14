@@ -4,10 +4,10 @@ from dataclasses import dataclass
 
 from requests import post
 
+from pz_server_manager.server.db.mod import sync
 from steam_api.mod import Mod
 from steam_api.utilities import (get_collection_details, get_mods_from_details,
                                  get_published_file_details)
-from pz_server_manager.server.db.mod import sync
 
 
 @dataclass

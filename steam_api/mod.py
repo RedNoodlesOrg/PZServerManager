@@ -23,7 +23,8 @@ def extract_id(text) -> list[ModId]:
     unique_matches = set([match[0].strip() for match in matches if match])
     matches_with_flag = [ModId(match, len(
         unique_matches) == 1) for match in unique_matches]
-    matches_with_flag = sorted(matches_with_flag, key=lambda mod_id: len(mod_id.id))
+    matches_with_flag = sorted(
+        matches_with_flag, key=lambda mod_id: len(mod_id.id))
     return matches_with_flag
 
 
