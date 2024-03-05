@@ -17,10 +17,10 @@ class ModId():
 
 def extract_id(text) -> list[ModId]:
     """extract_id"""
-    matches = re.findall(r"Mod\s?ID:\s*(.*?)(\r|\[/hr\]|$|\n)",
+    matches = re.findall(r"Mod\s?ID:\s*(?:\[\/b\] )?(.*?)(?:\r|\[\/hr\]|$|\n)",
                          text,
                          re.IGNORECASE)
-    unique_matches = set([match[0].strip() for match in matches if match])
+    unique_matches = set([match.strip() for match in matches if match])
     matches_with_flag = [ModId(match, len(
         unique_matches) == 1) for match in unique_matches]
     matches_with_flag = sorted(
