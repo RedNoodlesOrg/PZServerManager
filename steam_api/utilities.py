@@ -36,5 +36,9 @@ def get_mods_from_details(details: dict):
     """get_mods_from_details"""
     mods = []
     for file in details["publishedfiledetails"]:
-        mods.append(Mod(file))
+        if file['creator_app_id'] == 766:
+            file_ids = [item["publishedfileid"] for item in get_collection_details([file["publishedfileid"]])["collectiondetails"][0]["children"]]
+            mods.extend(get_mods_from_details(get_published_file_details(file_ids)))
+        else:
+            mods.append(Mod(file))
     return mods
