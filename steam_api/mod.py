@@ -39,8 +39,8 @@ class Mod():
 
     def __init__(self, workshop_details: dict):
         """__init__"""
-        self.description = workshop_details["description"]
-        self.mod_ids = extract_id(workshop_details["description"])
-        self.workshop_id = workshop_details["publishedfileid"]
-        self.thumbnail = workshop_details["preview_url"]
-        self.name = workshop_details["title"]
+        self.description = workshop_details.get("description", "NOT FOUND")
+        self.mod_ids = extract_id(workshop_details.get("description", ""))
+        self.workshop_id = workshop_details.get("publishedfileid", "NOT FOUND")
+        self.thumbnail = workshop_details.get("preview_url", "NOT FOUND")
+        self.name = workshop_details.get("title", "NOT FOUND")
