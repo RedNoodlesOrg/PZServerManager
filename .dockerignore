@@ -14,7 +14,6 @@ venv/
 *.code-workspace
 
 # Ignore other files that might not be necessary in a production build
-README.md
 Dockerfile
 *.md
 .flake8
