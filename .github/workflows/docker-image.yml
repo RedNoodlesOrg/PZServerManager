@@ -4,6 +4,9 @@ on:
   release:
     types: published
 
+env:
+  DOCKER_TAG: ${{ vars.DOCKER_HUB_USER }}/pz-server-manager
+
 jobs:
 
   build:
@@ -11,11 +14,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
+    - name: Check out repo
+      uses: actions/checkout@v4
+    
+    - name: Login to Docker Hub
       run: |
         docker login \
           -u ${{ vars.DOCKER_HUB_USER }} \
           -p ${{ secrets.DOCKER_HUB_TOKEN }}
-        docker build . --file Dockerfile --tag fakeapate/pz-server-manager
-        docker push fakeapate/pz-server-manager:${{ github.event.release.tag_name }}
+
+    - name: Build the Docker image
+      run: |
+        docker build . --file Dockerfile --tag $DOCKER_TAG
+
+    - name: Push the Docker image
+      run: |
+        docker push $DOCKER_TAG
