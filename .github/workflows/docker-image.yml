@@ -17,5 +17,5 @@ jobs:
         docker login \
           -u ${{ vars.DOCKER_HUB_USER }} \
           -p ${{ secrets.DOCKER_HUB_TOKEN }}
-        docker build . --file Dockerfile --tag pz-server-manager:${{ github.event.release.tag_name }}
+        docker build . --file Dockerfile --tag fakeapate/pz-server-manager:${{ github.event.release.tag_name }}
         docker push fakeapate/pz-server-manager:${{ github.event.release.tag_name }}
