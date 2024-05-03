@@ -28,6 +28,7 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag $DOCKER_TAG
+        docker build . --file Dockerfile --tag $DOCKER_LATEST
 
     - name: Push the Docker image
       run: |
