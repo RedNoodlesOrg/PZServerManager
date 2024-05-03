@@ -1,36 +1,10 @@
-name: Docker Image CI
+name: Deploy with Remote Docker
 
 on:
   release:
     types: published
 
-env:
-  DOCKER_TAG: ${{ vars.DOCKER_HUB_USER }}/pz-server-manager:${{ github.event.release.tag_name }}
-  DOCKER_LATEST: ${{ vars.DOCKER_HUB_USER }}/pz-server-manager:latest
-
-
 jobs:
-
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Check out repo
-      uses: actions/checkout@v4
-    
-    - name: Login to Docker Hub
-      run: |
-        docker login \
-          -u ${{ vars.DOCKER_HUB_USER }} \
-          -p ${{ secrets.DOCKER_HUB_TOKEN }}
-
-    - name: Build the Docker image
-      run: |
-        docker build . --file Dockerfile --tag $DOCKER_TAG
-        docker build . --file Dockerfile --tag $DOCKER_LATEST
-
-    - name: Push the Docker image
-      run: |
-        docker push $DOCKER_TAG
-        docker push $DOCKER_LATEST
+  deploy:
+    uses: RedNoodlesOrg/rednet-actions-workflows/.github/workflows/docker-build-push.yml@main
+    secrets: inherit
