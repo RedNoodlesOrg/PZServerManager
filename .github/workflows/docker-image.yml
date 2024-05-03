@@ -5,7 +5,8 @@ on:
     types: published
 
 env:
-  DOCKER_TAG: ${{ vars.DOCKER_HUB_USER }}/pz-server-manager:${{ github.event.release.tag_name }}
+  DOCKER_TAG: ${{ vars.DOCKER_HUB_USER }}/pz-server-manager:${{ github.event.release.tag_name }} ${{ vars.DOCKER_HUB_USER }}/pz-server-manager:latest
+
 
 jobs:
 
